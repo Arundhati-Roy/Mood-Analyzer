@@ -88,5 +88,51 @@ namespace MoodAnalyzerUnitTesting
             Assert.AreEqual(expected, mood);
 
         }
+        [TestMethod]
+        [DataRow("I am in Happy mood")]
+        [DataRow(null)]
+        public void TC2_1_NulltoHappy_WithException(string message)
+        {
+            //Access
+            string expected = "Happy";
+            MoodAnalyzer moodAnalyse = new MoodAnalyzer(message);
+
+            //Act
+            string mood = moodAnalyse.AnalyseMood_WithException(message);
+
+            //Assert
+            Assert.AreEqual(expected, mood);
+
+        }
+        [TestMethod]
+        public void TC3_1_NullException()
+        {
+            try
+            {
+                string message = null;
+                MoodAnalyzer moodAnalyse = new MoodAnalyzer(message);
+                string mood = moodAnalyse.AnalyseMood_withCustomException(message);
+            }
+            catch (MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("Mood should not be null", e.Message);
+            }
+
+        }
+        [TestMethod]
+        public void TC3_2_EmptyException()
+        {
+            try
+            {
+                string message = "";
+                MoodAnalyzer moodAnalyse = new MoodAnalyzer(message);
+                string mood = moodAnalyse.AnalyseMood_withCustomException(message);
+            }
+            catch (MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("Mood should not be empty", e.Message);
+            }
+
+        }
     }
 }
