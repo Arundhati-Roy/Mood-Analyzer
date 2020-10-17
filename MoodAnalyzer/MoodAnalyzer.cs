@@ -18,10 +18,17 @@ namespace ExceptionHandling
         }
         public string AnalyseMood()
         {
-            if (this.message.Contains("Sad"))
-                return "Sad";
-            else
+            try
+            {
+                if (this.message.Contains("Sad"))
+                    return "Sad";
+                else
+                    return "Happy";
+            }
+            catch (NullReferenceException)
+            {
                 return "Happy";
+            }
         }
     }
 }
