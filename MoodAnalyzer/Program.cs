@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoodAnalyzer
+namespace ExceptionHandling
 {
     class Program
     {

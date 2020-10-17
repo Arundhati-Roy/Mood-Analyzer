@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\priyadarshini roy\\source\\repos\\MoodAnalyzer\\MoodAnalyzer\\MoodAnalyzer.csproj",
-      "projectName": "MoodAnalyzer",
-      "projectPath": "C:\\Users\\priyadarshini roy\\source\\repos\\MoodAnalyzer\\MoodAnalyzer\\MoodAnalyzer.csproj",
+      "projectUniqueName": "C:\\Users\\priyadarshini roy\\source\\repos\\MoodAnalyzer\\MoodAnalyzer\\ExceptionHandling.csproj",
+      "projectName": "ExceptionHandling",
+      "projectPath": "C:\\Users\\priyadarshini roy\\source\\repos\\MoodAnalyzer\\MoodAnalyzer\\ExceptionHandling.csproj",
       "packagesPath": "C:\\Users\\priyadarshini roy\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\priyadarshini roy\\source\\repos\\MoodAnalyzer\\MoodAnalyzer\\obj\\",
       "projectStyle": "PackageReference",
