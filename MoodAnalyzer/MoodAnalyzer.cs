@@ -8,10 +8,17 @@ namespace ExceptionHandling
     public class MoodAnalyzer
     {
         public string message;
-        
-        public string AnalyseMood(string message)
+        public MoodAnalyzer()
         {
-            if (message.Contains("Sad"))
+            this.message = null;
+        }
+        public MoodAnalyzer(string message)
+        {
+            this.message = message;
+        }
+        public string AnalyseMood()
+        {
+            if (this.message.Contains("Sad"))
                 return "Sad";
             else
                 return "Happy";

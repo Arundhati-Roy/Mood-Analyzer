@@ -11,16 +11,14 @@ namespace MoodAnalyzerUnitTesting
         [TestMethod]
         public void TC1_1_SadMood()
         {
-            //Assert
+            //Access
             string expected = "Sad";
             string message = "I am in a Sad mood";
-            //string message = "I am in a Happy mood";
-            //string message = null;
 
-            MoodAnalyzer moodAnalyse = new MoodAnalyzer();
+            MoodAnalyzer moodAnalyse = new MoodAnalyzer(message);
 
             //Act
-            string mood = moodAnalyse.AnalyseMood(message);
+            string mood = moodAnalyse.AnalyseMood();
 
             //Assert
             Assert.AreEqual(expected, mood);
@@ -29,16 +27,46 @@ namespace MoodAnalyzerUnitTesting
         [TestMethod]
         public void TC1_2_AnyMood()
         {
-            //Assert
+            //Access
             string expected = "Happy";
             string message = "I am in a any mood";
-            //string message = "I am in a Happy mood";
-            //string message = null;
 
-            MoodAnalyzer moodAnalyse = new MoodAnalyzer();
+            MoodAnalyzer moodAnalyse = new MoodAnalyzer(message);
 
             //Act
-            string mood = moodAnalyse.AnalyseMood(message);
+            string mood = moodAnalyse.AnalyseMood();
+
+            //Assert
+            Assert.AreEqual(expected, mood);
+
+        }
+        [TestMethod]
+        public void RefactorTC1_1_SadMood()
+        {
+            //Access
+            string expected = "Sad";
+            string message = "I am in a Sad mood";
+
+            MoodAnalyzer moodAnalyse = new MoodAnalyzer(message);
+
+            //Act
+            string mood = moodAnalyse.AnalyseMood();
+
+            //Assert
+            Assert.AreEqual(expected, mood);
+
+        }
+        [TestMethod]
+        public void RefactorTC1_2_HappyMood()
+        {
+            //Access
+            string expected = "Happy";
+            string message = "I am in a Happy mood";
+
+            MoodAnalyzer moodAnalyse = new MoodAnalyzer(message);
+
+            //Act
+            string mood = moodAnalyse.AnalyseMood();
 
             //Assert
             Assert.AreEqual(expected, mood);
