@@ -134,5 +134,81 @@ namespace MoodAnalyzerUnitTesting
             }
 
         }
+        [TestMethod]
+        /// Proper className
+        public void TC4_1_ClassNameReturnsObject()
+        {
+            object expected = new MoodAnalyzer();
+            object obj = MoodAnalyzerFactory.CreateMoodAnalyse("ExceptionHandling.MoodAnalyzer", "MoodAnalyzer");
+            expected.Equals(obj);
+        }
+        [TestMethod]
+        /// ImProper className
+        public void TC4_2_ClassNameReturnsObject_WithException()
+        {
+            try
+            {
+                object expected = new MoodAnalyzer();
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyse("ExceptionHandling.ModAnalyzer", "MoodAnalyzer");
+                expected.Equals(obj);
+            }
+            catch(MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("No such class", e.Message);
+            }
+        }
+        /*[TestMethod]
+        /// ImProper constructorName
+        public void TC4_3_ConstructorNameReturnsObject_WithException()
+        {
+            try
+            {
+                object expected = new MoodAnalyzer();
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyse("ExceptionHandling.MoodAnalyzer", "ModAnalyzer");
+                expected.Equals(obj);
+            }
+            catch (MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("No such constructor", e.Message);
+            }
+        }*/
+        [TestMethod]
+        /// Proper className
+        public void RefactorTC4_1_ClassNameReturnsObject()
+        {
+            object expected = new MoodAnalyzer();
+            object obj = MoodAnalyzerFactory.CreateMoodAnalyseWithoutAssembly("ExceptionHandling.MoodAnalyzer", "MoodAnalyzer");
+            expected.Equals(obj);
+        }
+        [TestMethod]
+        /// ImProper className
+        public void RefactorTC4_2_ClassNameReturnsObject_WithException()
+        {
+            try
+            {
+                object expected = new MoodAnalyzer();
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyseWithoutAssembly("ExceptionHandling.ModAnalyzer", "MoodAnalyzer");
+                expected.Equals(obj);
+            }
+            catch (MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("No such class found", e.Message);
+            }
+        }
+        [TestMethod]
+        /// ImProper constructorName
+        public void RefactorTC4_3_ConstructorNameReturnsObject_WithException()
+        {
+            try
+            {
+                object expected = new MoodAnalyzer();
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyseWithoutAssembly("ExceptionHandling.MoodAnalyzer", "ModAnalyzer");
+                expected.Equals(obj);
+            }
+            catch (MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("No such constructor found", e.Message);
+            }
+        }
     }
 }
