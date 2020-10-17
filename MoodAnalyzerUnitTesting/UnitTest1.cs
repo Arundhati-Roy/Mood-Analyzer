@@ -234,7 +234,7 @@ namespace MoodAnalyzerUnitTesting
                 //Assert
                 expected.GetType().Equals(obj.GetType());
             }
-            catch(MoodAnalyzerCustomException e)
+            catch (MoodAnalyzerCustomException e)
             {
                 Assert.AreEqual("No such class found", e.Message);
             }
@@ -255,6 +255,59 @@ namespace MoodAnalyzerUnitTesting
             catch (MoodAnalyzerCustomException e)
             {
                 Assert.AreEqual("No such constructor found", e.Message);
+            }
+        }
+        /// <summary>
+        /// TC 6.1 When we give right class name, constructor name and message passed as happy mood and valid method name then should return HAPPY
+        /// </summary>
+        [TestMethod]
+        public void TC6_1_HappyReturnsHappy()
+        {
+            //Arrange
+            MoodAnalyzer moodAnalyser = new MoodAnalyzer("I am in happy mood today");
+            //Act
+            string actual = MoodAnalyzerReflector.InvokeAnalyseMood("ExceptionHandling.MoodAnalyzer", "MoodAnalyzer", "I am in happy mood today", "AnalyseMood");
+            //Assert
+            Assert.AreEqual("HAPPY", actual);
+        }
+
+        /// <summary>
+        /// TC 6.2 When we give right class name, constructor name and message passed as happy mood and valid method name then should throw exception 
+        /// </summary>
+        [TestMethod]
+        public void TC6_2_InvalidThrowsException()
+        {
+            //Act
+            try
+            {
+                MoodAnalyzer moodAnalyser = new MoodAnalyzer("I am in happy mood today");
+                object expected = moodAnalyser.AnalyseMood();
+                object actual = MoodAnalyzerReflector.InvokeAnalyseMood("ExceptionHandling.MoodAnalyzer", "MoodAnalyzer", "I am in happy mood today", "InvalidMethod");
+            }
+            //Assert
+            catch (MoodAnalyzerCustomException exception)
+            {
+                Assert.AreEqual("No such method found", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// TC 6.3 When we give right class name, constructor name and message passed as null and valid method name then should throw exception 
+        /// </summary>
+        [TestMethod]
+        public void TC6_3_NullThrowsException()
+        {
+            //Act
+            try
+            {
+                MoodAnalyzer moodAnalyser = new MoodAnalyzer("I am in happy mood today");
+                object expected = moodAnalyser.AnalyseMood();
+                object actual = MoodAnalyzerReflector.InvokeAnalyseMood("ExceptionHandling.MoodAnalyzer", "MoodAnalyzer", null, "AnalyseMood");
+            }
+            //Assert
+            catch (MoodAnalyzerCustomException exception)
+            {
+                Assert.AreEqual("Mood should not be null", exception.Message);
             }
         }
     }
