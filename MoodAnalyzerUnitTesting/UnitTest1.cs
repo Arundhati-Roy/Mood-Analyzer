@@ -152,7 +152,7 @@ namespace MoodAnalyzerUnitTesting
                 object obj = MoodAnalyzerFactory.CreateMoodAnalyse("ExceptionHandling.ModAnalyzer", "MoodAnalyzer");
                 expected.Equals(obj);
             }
-            catch(MoodAnalyzerCustomException e)
+            catch (MoodAnalyzerCustomException e)
             {
                 Assert.AreEqual("No such class", e.Message);
             }
@@ -204,6 +204,53 @@ namespace MoodAnalyzerUnitTesting
                 object expected = new MoodAnalyzer();
                 object obj = MoodAnalyzerFactory.CreateMoodAnalyseWithoutAssembly("ExceptionHandling.MoodAnalyzer", "ModAnalyzer");
                 expected.Equals(obj);
+            }
+            catch (MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("No such constructor found", e.Message);
+            }
+        }
+        [TestMethod]
+        /// Proper ClassName Returns object
+        public void TC5_1ReturnObject()
+        {
+            //Arrange
+            object expected = new MoodAnalyzer();
+            //Act
+            object obj = MoodAnalyzerFactory.CreateMoodAnalyseWithParameter("ExceptionHandling.MoodAnalyzer", "MoodAnalyzer", "I am in happy mood today");
+            //Assert
+            expected.GetType().Equals(obj.GetType());
+        }
+        [TestMethod]
+        /// ImProper ClassName with Exception
+        public void TC5_2ReturnObject()
+        {
+            try
+            {
+                //Arrange
+                object expected = new MoodAnalyzer();
+                //Act
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyseWithParameter("ExceptionHandling.Mo0dAnalyzer", "MoodAnalyzer", "I am in happy mood today");
+                //Assert
+                expected.GetType().Equals(obj.GetType());
+            }
+            catch(MoodAnalyzerCustomException e)
+            {
+                Assert.AreEqual("No such class found", e.Message);
+            }
+        }
+        [TestMethod]
+        /// ImProper ConstructorName with Exception
+        public void TC5_3ReturnObject()
+        {
+            try
+            {
+                //Arrange
+                object expected = new MoodAnalyzer();
+                //Act
+                object obj = MoodAnalyzerFactory.CreateMoodAnalyseWithParameter("ExceptionHandling.MoodAnalyzer", "M0odAnalyzer", "I am in happy mood today");
+                //Assert
+                expected.GetType().Equals(obj.GetType());
             }
             catch (MoodAnalyzerCustomException e)
             {
