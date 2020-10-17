@@ -272,7 +272,7 @@ namespace MoodAnalyzerUnitTesting
         }
 
         /// <summary>
-        /// TC 6.2 When we give right class name, constructor name and message passed as happy mood and valid method name then should throw exception 
+        /// TC 6.2 When we give right class name, constructor name and message passed as happy mood and invalid method name then should throw exception 
         /// </summary>
         [TestMethod]
         public void TC6_2_InvalidThrowsException()
@@ -308,6 +308,55 @@ namespace MoodAnalyzerUnitTesting
             catch (MoodAnalyzerCustomException exception)
             {
                 Assert.AreEqual("Mood should not be null", exception.Message);
+            }
+        }
+        /// <summary>
+        /// TC 7.1 When given proper fieldName and a mood message for happy mood then should return HAPPY
+        /// </summary>
+
+        [TestMethod]
+        public void TC7_1_ChangeMoodDynamicallyForValidFieldName()
+        {
+            // ACT
+            string actual = MoodAnalyzerReflector.SetField("HAPPY", "message");
+
+            // Assert
+            Assert.AreEqual("HAPPY", actual);
+        }
+
+        /// <summary>
+        ///  TC 7.2 When given wrong fieldName and a happy mood message then should throw exception
+        /// </summary>
+        [TestMethod]
+        public void TC7_2_ChangeMoodDynamicallyInValid()
+        {
+            try
+            {
+                // ACT
+                string actual = MoodAnalyzerReflector.SetField("I am in happy mood today", "InvalidField");
+            }
+            catch (MoodAnalyzerCustomException exception)
+            {
+                // Assert
+                Assert.AreEqual("Field is not found", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// TC 7.3 When given correct fieldName and passing a null mood message then throw error that Mood should not be NULL
+        /// </summary>
+        [TestMethod]
+        public void TC7_3_ChangeMoodDynamicallySetNull()
+        {
+            try
+            {
+                // ACT
+                string actual = MoodAnalyzerReflector.SetField(null, "message");
+            }
+            catch (MoodAnalyzerCustomException exception)
+            {
+                // Assert
+                Assert.AreEqual("Mood should not be NULL", exception.Message);
             }
         }
     }

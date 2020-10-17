@@ -25,5 +25,32 @@ namespace ExceptionHandling
                 throw new MoodAnalyzerCustomException(MoodAnalyzerCustomException.ExceptionType.NO_SUCH_METHOD, "No such method found");
             }
         }
+
+        public static string SetField(string message, string fieldName)
+        {
+            try
+            {
+                //object of class
+                MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
+
+                // Get the type of the class
+                Type type = typeof(MoodAnalyzer);
+
+                // Get the field by using reflections
+                FieldInfo fieldInfo = type.GetField(fieldName);
+                if (message == null)
+                    throw new MoodAnalyzerCustomException(MoodAnalyzerCustomException.ExceptionType.NULL_MESSAGE, "Mood should not be NULL");
+
+                // set the field value of a particular field in particular object
+                fieldInfo.SetValue(moodAnalyzer, message);
+
+                return moodAnalyzer.message;
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalyzerCustomException(MoodAnalyzerCustomException.ExceptionType.NO_SUCH_FIELD, "Field is not found");
+
+            }
+        }
     }
 }
